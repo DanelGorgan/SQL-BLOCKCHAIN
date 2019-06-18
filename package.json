@@ -1,0 +1,22 @@
+{
+  "name": "sql-blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanelGorgan/SQL-BLOCKCHAIN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanelGorgan/SQL-BLOCKCHAIN/issues"
+  },
+  "homepage": "https://github.com/DanelGorgan/SQL-BLOCKCHAIN#readme",
+  "dependencies": {
+    "mssql": "^5.1.0"
+  }
+}
