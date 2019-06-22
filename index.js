@@ -1,20 +1,19 @@
-const sql = require('mssql');
-
+const sql = require('mssql/msnodesqlv8');
 const config = {
-    user: '...',
-    password: '...',
-    server: 'localhost',
-    database: 'master',
-
+    driver: 'msnodesqlv8',
+    connectionString: 'Driver={SQL Server Native Client 11.0};Server={DGORGAN-L};Database={City_Hall};Trusted_Connection={yes};',
 };
 
-async () => {
-    try {
-        // await sql.connect('mssql://username:password@localhost/database');
-        await sql.connect(config);
-        const result = await sql.query`select * from mytable`;
-        console.dir(result)
-    } catch (err) {
-        console.error(err)
-    }
-};
+const saveToBlockchain = require('./smart-contract').saveToBlockchain;
+
+sql.connect(config)
+    .then(async function () {
+        const result = await sql.query`select * from Taxes_Payments`;
+        saveToBlockchain(result.recordset, (err, res) => {
+            console.log('DONE!');
+            process.exit(0);
+        });
+    })
+    .catch(function (err) {
+        console.log(err)
+    });
