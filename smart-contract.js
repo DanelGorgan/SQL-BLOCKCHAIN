@@ -3,7 +3,7 @@ const Web3 = require('web3');
 let web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
 let abi = require('../StaaS/build/contracts/TaxStorage').abi,
-    address = '0x5C889079481CcFacFfB003D04Ecb4759a99B88c6',
+    address = '0x42D0cC85dF314FE25bBAE130dEEa8A825C4a6d3B',
     async = require("async"),
     contractInstance = new web3.eth.Contract(abi, address);
 
@@ -12,7 +12,7 @@ exports.saveToBlockchain = function (payload, callback) {
     async.eachSeries(payload, (file, cb_each) => {
         async.waterfall([
             (cb) => {
-                contractInstance.methods.upload(123, file.Name, file.Amount, '0x537C9a6C0ae49e58679e8C2F080BCB0C03721484', '0x537C9a6C0ae49e58679e8C2F080BCB0C03721484')
+                contractInstance.methods.upload(Date.now(), file.Name, file.Amount, file.Penalties, file.Increases, file.Asset, file.UserId, '0x537C9a6C0ae49e58679e8C2F080BCB0C03721484', '0x537C9a6C0ae49e58679e8C2F080BCB0C03721484')
                     .send({from: '0x537C9a6C0ae49e58679e8C2F080BCB0C03721484', gas: 3000000}, (error, response) => {
                         if (error) {
                             console.error(error)
